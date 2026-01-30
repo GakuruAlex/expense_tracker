@@ -36,9 +36,7 @@ class _NewExpenseState extends State<NewExpense> {
   void _submitExpensedata() {
     final inputAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = inputAmount == null || inputAmount <= 0;
-    if (_titleController.text.trim().isEmpty ||
-        amountIsInvalid ||
-        _selectedDate == null) {
+    if (_titleController.text.trim().isEmpty || amountIsInvalid) {
       showDialog(
         context: context,
         builder: (ctx) {
@@ -110,9 +108,7 @@ class _NewExpenseState extends State<NewExpense> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      _selectedDate == null
-                          ? "No Date Selected"
-                          : dateFormatter.format(_selectedDate!),
+                      dateFormatter.format(_selectedDate),
                     ),
                     Expanded(
                       child: IconButton(
