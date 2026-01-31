@@ -49,8 +49,24 @@ class _ExpenseState extends State<Expenses> {
     });
   }
 
+  void _onUnDo(Expense expense, int index) {
+    setState(() {
+      _registeredExpenses.insert(index, expense);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = ExpensesList(
+      expenses: _registeredExpenses,
+      onDismissed: _removeExpense,
+      onUnDo: _onUnDo,
+    );
+    if (_registeredExpenses.isEmpty) {
+      mainContent = const Center(
+        child: Text("No Expenses found. Pleas add some."),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -64,10 +80,7 @@ class _ExpenseState extends State<Expenses> {
         children: [
           const Text("The chart"),
           Expanded(
-            child: ExpensesList(
-              expenses: _registeredExpenses,
-              onDismissed: _removeExpense,
-            ),
+            child: mainContent,
           ),
         ],
       ),

@@ -7,10 +7,12 @@ class ExpensesList extends StatelessWidget {
     super.key,
     required this.expenses,
     required this.onDismissed,
+    required this.onUnDo,
   });
 
   final List<Expense> expenses;
   final void Function(Expense expense) onDismissed;
+  final void Function(Expense expense, int index) onUnDo;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -27,7 +29,15 @@ class ExpensesList extends StatelessWidget {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(
-            SnackBar(content: Text('${expense.title} Removed')),
+            SnackBar(
+              content: Text('${expense.title} Removed'),
+              action: SnackBarAction(
+                label: "Undo",
+                onPressed: () {
+                  onUnDo(expense, index);
+                },
+              ),
+            ),
           );
         },
       ),
