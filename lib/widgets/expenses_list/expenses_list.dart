@@ -30,6 +30,8 @@ class ExpensesList extends StatelessWidget {
             context,
           ).showSnackBar(
             SnackBar(
+              duration: Duration(seconds: 5),
+              persist: false,
               content: Text('${expense.title} Removed'),
               action: SnackBarAction(
                 label: "Undo",
