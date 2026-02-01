@@ -32,7 +32,21 @@ class _ExpenseState extends State<Expenses> {
       isScrollControlled: true,
       context: context,
       builder: (ctx) {
-        return NewExpense(onAddExpense: _addExpense);
+        return Theme(
+          data: Theme.of(context).copyWith(
+            textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Color.fromARGB(255, 78, 5, 247),
+              displayColor: Color.fromARGB(255, 26, 2, 238),
+            ),
+            buttonTheme: ButtonThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Color.fromARGB(124, 247, 161, 2),
+              ),
+              textTheme: ButtonTextTheme.primary,
+            ),
+          ),
+          child: NewExpense(onAddExpense: _addExpense),
+        );
       },
     );
   }
@@ -69,6 +83,7 @@ class _ExpenseState extends State<Expenses> {
     }
     return Scaffold(
       appBar: AppBar(
+        title: Text("Expense Tracker"),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
