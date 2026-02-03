@@ -35,12 +35,12 @@ class _ExpenseState extends State<Expenses> {
         return Theme(
           data: Theme.of(context).copyWith(
             textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: Color.fromARGB(255, 97, 241, 1),
-              displayColor: Color.fromARGB(255, 93, 250, 2),
+              bodyColor: Color.fromARGB(255, 78, 5, 247),
+              displayColor: Color.fromARGB(255, 26, 2, 238),
             ),
             buttonTheme: ButtonThemeData(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: Color.fromARGB(123, 10, 10, 10),
+                seedColor: Color.fromARGB(124, 247, 161, 2),
               ),
               textTheme: ButtonTextTheme.primary,
             ),

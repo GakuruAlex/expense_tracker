@@ -3,11 +3,11 @@ import "package:expense_tracker/widgets/expenses.dart";
 import 'package:google_fonts/google_fonts.dart';
 
 final kSeedColor = ColorScheme.fromSeed(
-  seedColor: Color.fromARGB(123, 22, 22, 22),
+  seedColor: Color.fromARGB(124, 247, 161, 2),
 );
 
 final bottomSheetSeedColor = ColorScheme.fromSeed(
-  seedColor: Color.fromARGB(255, 29, 28, 28),
+  seedColor: Color.fromARGB(255, 78, 235, 209),
 );
 final kDarkSeedColor = ColorScheme.fromSeed(
   seedColor: Color.fromARGB(123, 116, 76, 2),
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           foregroundColor: kSeedColor.onSecondaryContainer,
         ),
         cardTheme: CardThemeData().copyWith(
-          color: Color.fromARGB(255, 7, 7, 7),
+          color: Color.fromARGB(255, 78, 235, 209),
         ),
         bottomSheetTheme: BottomSheetThemeData().copyWith(
           backgroundColor: Color.fromARGB(0, 0, 0, 1),
@@ -52,15 +52,15 @@ class MyApp extends StatelessWidget {
           titleLarge: GoogleFonts.oswald(
             fontSize: 30,
             fontStyle: FontStyle.italic,
-            color: Color.fromARGB(255, 97, 241, 1),
+            color: Color.fromARGB(255, 31, 30, 30),
           ),
           bodyMedium: GoogleFonts.merriweather(
             fontSize: 18,
 
-            color: Color.fromARGB(255, 97, 241, 1),
+            color: Color.fromARGB(255, 24, 24, 24),
           ),
           displaySmall: GoogleFonts.pacifico(
-            color: Color.fromARGB(255, 97, 241, 1),
+            color: Color.fromARGB(255, 31, 30, 30),
             fontSize: 18,
           ),
         ),
