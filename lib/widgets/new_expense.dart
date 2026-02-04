@@ -1,3 +1,4 @@
+import 'package:expense_tracker/main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:expense_tracker/models/expense.dart';
@@ -24,12 +25,15 @@ class _NewExpenseState extends State<NewExpense> {
     final now = DateTime.now();
     final firstDate = DateTime(now.year - 1, now.month, now.day);
     final pickedDate = await showDatePicker(
+      initialDate: now,
       context: context,
       firstDate: firstDate,
       lastDate: now,
     );
+    final selectedDate = pickedDate ?? now;
+
     setState(() {
-      _selectedDate = pickedDate!;
+      _selectedDate = selectedDate;
     });
   }
 
@@ -84,7 +88,10 @@ class _NewExpenseState extends State<NewExpense> {
             controller: _titleController,
             maxLength: 50,
             decoration: InputDecoration(
-              label: Text("Title"),
+              label: Text(
+                "Title",
+                style: TextStyle(color: onPrimaryTextColor),
+              ),
             ),
           ),
           Row(
@@ -95,7 +102,10 @@ class _NewExpenseState extends State<NewExpense> {
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     prefixText: '\$ ',
-                    label: Text("Amount"),
+                    label: Text(
+                      "Amount",
+                      style: TextStyle(color: onPrimaryTextColor),
+                    ),
                   ),
                 ),
               ),
@@ -113,7 +123,10 @@ class _NewExpenseState extends State<NewExpense> {
                     Expanded(
                       child: IconButton(
                         onPressed: _presentDatePicker,
-                        icon: Icon(Icons.calendar_month),
+                        icon: Icon(
+                          Icons.calendar_month,
+                          color: onPrimaryTextColor,
+                        ),
                       ),
                     ),
                   ],
@@ -145,6 +158,11 @@ class _NewExpenseState extends State<NewExpense> {
                     _selectedCategory = value;
                   });
                 },
+                icon: Icon(
+                  Icons.arrow_drop_down,
+                  color: accentColor,
+                  size: 36,
+                ),
               ),
               const Spacer(),
               ElevatedButton(
@@ -153,6 +171,7 @@ class _NewExpenseState extends State<NewExpense> {
                 },
                 child: Text("Cancel"),
               ),
+              const Spacer(),
               ElevatedButton(
                 onPressed: _submitExpensedata,
                 child: const Text("Save Expense"),

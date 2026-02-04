@@ -1,3 +1,4 @@
+import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -34,13 +35,9 @@ class _ExpenseState extends State<Expenses> {
       builder: (ctx) {
         return Theme(
           data: Theme.of(context).copyWith(
-            textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: Color.fromARGB(255, 97, 241, 1),
-              displayColor: Color.fromARGB(255, 93, 250, 2),
-            ),
             buttonTheme: ButtonThemeData(
               colorScheme: ColorScheme.fromSeed(
-                seedColor: Color.fromARGB(123, 10, 10, 10),
+                seedColor: accentColor,
               ),
               textTheme: ButtonTextTheme.primary,
             ),
