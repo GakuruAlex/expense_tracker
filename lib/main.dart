@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import "package:expense_tracker/widgets/expenses.dart";
 import 'package:google_fonts/google_fonts.dart';
 
-final kSeedColor = ColorScheme.fromSeed(
-  seedColor: Color.fromARGB(123, 22, 22, 22),
+final darkPrimaryColor = Color.fromARGB(255, 1, 68, 104);
+final darkPrimaryTextColor = Color.from(
+  alpha: 255,
+  red: 255,
+  green: 255,
+  blue: 255,
 );
+final primaryColor = Color.fromARGB(72, 1, 37, 243);
+final onPrimaryTextColor = Color.fromARGB(255, 255, 255, 255);
+final accentColor = Color.fromARGB(255, 255, 87, 34);
+final lightPrimaryColor = Color.fromARGB(255, 187, 222, 251);
+final textColor = Color.fromARGB(255, 33, 33, 33);
+final secondaryTextColor = Color.fromARGB(255, 117, 117, 117);
 
-final bottomSheetSeedColor = ColorScheme.fromSeed(
-  seedColor: Color.fromARGB(255, 29, 28, 28),
-);
-final kDarkSeedColor = ColorScheme.fromSeed(
-  seedColor: Color.fromARGB(123, 116, 76, 2),
-);
 void main() {
   runApp(MyApp());
 }
@@ -23,55 +27,54 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Expenses(),
       theme: ThemeData().copyWith(
-        colorScheme: kSeedColor,
-        brightness: Brightness.light,
+        scaffoldBackgroundColor: primaryColor,
+
+        colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
         appBarTheme: AppBarTheme().copyWith(
-          backgroundColor: kSeedColor.onPrimary,
-          foregroundColor: kSeedColor.onSecondaryContainer,
+          iconTheme: IconThemeData(color: accentColor, size: 36),
+
+          backgroundColor: ColorScheme.fromSeed(
+            seedColor: darkPrimaryColor,
+          ).primary,
+          foregroundColor: ColorScheme.fromSeed(
+            seedColor: darkPrimaryColor,
+          ).onPrimary,
         ),
         cardTheme: CardThemeData().copyWith(
-          color: Color.fromARGB(255, 7, 7, 7),
+          color: darkPrimaryColor,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: accentColor),
+            borderRadius: BorderRadiusGeometry.all(
+              Radius.circular(12),
+            ),
+          ),
         ),
         bottomSheetTheme: BottomSheetThemeData().copyWith(
-          backgroundColor: Color.fromARGB(0, 0, 0, 1),
+          backgroundColor: darkPrimaryColor,
           constraints: BoxConstraints(maxHeight: 650),
-          modalBackgroundColor: Color.fromARGB(255, 15, 15, 15),
+          modalBackgroundColor: darkPrimaryColor,
         ),
 
         textTheme: TextTheme(
-          labelLarge: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 28, 3, 250),
+          labelLarge: GoogleFonts.acme(
+            fontSize: 22,
+            color: darkPrimaryTextColor,
           ),
-          displayLarge: const TextStyle(
+          displayLarge: GoogleFonts.oswald(
             fontSize: 72,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 97, 241, 1),
+            color: onPrimaryTextColor,
           ),
           titleLarge: GoogleFonts.oswald(
             fontSize: 30,
             fontStyle: FontStyle.italic,
-            color: Color.fromARGB(255, 97, 241, 1),
+            color: onPrimaryTextColor,
           ),
-          bodyMedium: GoogleFonts.merriweather(
-            fontSize: 18,
+          bodyMedium: GoogleFonts.oswald(
+            fontSize: 22,
 
-            color: Color.fromARGB(255, 97, 241, 1),
+            color: onPrimaryTextColor,
           ),
-          displaySmall: GoogleFonts.pacifico(
-            color: Color.fromARGB(255, 97, 241, 1),
-            fontSize: 18,
-          ),
-        ),
-      ),
-
-      darkTheme: ThemeData().copyWith(
-        colorScheme: kDarkSeedColor,
-        brightness: Brightness.dark,
-        appBarTheme: AppBarTheme().copyWith(
-          backgroundColor: kDarkSeedColor.onPrimaryContainer,
-          foregroundColor: kDarkSeedColor.onSecondaryContainer,
         ),
       ),
     );

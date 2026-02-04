@@ -1,3 +1,4 @@
+import 'package:expense_tracker/main.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,10 @@ class ExpensesItem extends StatelessWidget {
                 Spacer(),
                 Row(
                   children: [
-                    Icon(categoryIcons[expense.category]),
+                    Icon(
+                      categoryIcons[expense.category],
+                      color: accentColor,
+                    ),
                     const SizedBox(
                       width: 8,
                     ),
