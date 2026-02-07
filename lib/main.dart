@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:expense_tracker/widgets/expenses.dart";
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final darkPrimaryColor = Color.fromARGB(255, 1, 68, 104);
@@ -17,6 +18,7 @@ final textColor = Color.fromARGB(255, 33, 33, 33);
 final secondaryTextColor = Color.fromARGB(255, 117, 117, 117);
 
 void main() {
+  //debugPaintSizeEnabled = true;
   runApp(MyApp());
 }
 
