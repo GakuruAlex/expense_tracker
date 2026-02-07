@@ -69,6 +69,8 @@ class _ExpenseState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     Widget mainContent = ExpensesList(
       expenses: _registeredExpenses,
       onDismissed: _removeExpense,
@@ -89,14 +91,27 @@ class _ExpenseState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Chart(expenses: _registeredExpenses),
-          Expanded(
-            child: mainContent,
-          ),
-        ],
-      ),
+      body: width < 600
+          ? Column(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  flex: 1,
+                  child: mainContent,
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                Chart(expenses: _registeredExpenses),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 40, 8, 20),
+                    child: mainContent,
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
