@@ -103,7 +103,7 @@ class _ExpenseState extends State<Expenses> {
             )
           : Row(
               children: [
-                Chart(expenses: _registeredExpenses),
+                Expanded(child: Chart(expenses: _registeredExpenses)),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(8, 40, 8, 20),
