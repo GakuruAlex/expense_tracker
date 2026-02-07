@@ -1,6 +1,6 @@
-import 'package:expense_tracker/main.dart';
+import 'package:expense_tracker/widgets/bottomsheet/landscape_bottomsheet.dart';
+import 'package:expense_tracker/widgets/bottomsheet/potrait_bottomsheet.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:expense_tracker/models/expense.dart';
 
@@ -72,6 +72,12 @@ class _NewExpenseState extends State<NewExpense> {
     }
   }
 
+  void onCategoryChange(Category category) {
+    setState(() {
+      _selectedCategory = category;
+    });
+  }
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -83,152 +89,23 @@ class _NewExpenseState extends State<NewExpense> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsGeometry.fromLTRB(16, 48, 16, 16),
-      child: Column(
-        children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: InputDecoration(
-              label: Text(
-                "Title",
-                style: TextStyle(color: onPrimaryTextColor),
-              ),
+      child: MediaQuery.of(context).size.width < 600
+          ? PotraitBottomsheet(
+              titleController: _titleController,
+              amountController: _amountController,
+              selectedDate: _selectedDate,
+              presentDatePicker: _presentDatePicker,
+              categoryChange: onCategoryChange,
+              onSubmitExpenseData: _submitExpensedata,
+            )
+          : LandscapeBottomsheet(
+              onSubmitExpenseData: _submitExpensedata,
+              categoryChange: onCategoryChange,
+              titleController: _titleController,
+              amountController: _amountController,
+              selectedDate: _selectedDate,
+              presentDatePicker: _presentDatePicker,
             ),
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    prefixText: '\$ ',
-                    label: Text(
-                      "Amount",
-                      style: TextStyle(color: onPrimaryTextColor),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      dateFormatter.format(_selectedDate),
-                    ),
-                    Expanded(
-                      child: IconButton(
-                        onPressed: _presentDatePicker,
-                        icon: Icon(
-                          Icons.calendar_month,
-                          color: onPrimaryTextColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-
-          Row(
-            children: [
-              Expanded(
-                child: DropdownMenu<Category>(
-                  width: 240,
-                  menuStyle: MenuStyle(
-                    backgroundColor: WidgetStateProperty.all(darkPrimaryColor),
-                    surfaceTintColor: WidgetStatePropertyAll(
-                      onPrimaryTextColor,
-                    ),
-                  ),
-                  trailingIcon: Icon(
-                    Icons.arrow_drop_down_circle_outlined,
-                    color: onPrimaryTextColor,
-                    size: 32,
-                  ),
-                  textStyle: GoogleFonts.oswald(
-                    fontStyle: FontStyle.italic,
-                    color: onPrimaryTextColor,
-                    fontSize: 18,
-                  ),
-                  label: Text(
-                    "Category",
-                    style: GoogleFonts.oswald(color: onPrimaryTextColor),
-                  ),
-                  hintText: "Select a Category",
-                  onSelected: (value) {
-                    if (value == null) {
-                      return;
-                    }
-                    setState(() {
-                      _selectedCategory = value;
-                    });
-                  },
-                  dropdownMenuEntries: Category.values.map((category) {
-                    return DropdownMenuEntry(
-                      style: ButtonStyle(
-                        foregroundColor: WidgetStatePropertyAll(
-                          onPrimaryTextColor,
-                        ),
-                        textStyle: WidgetStatePropertyAll(
-                          GoogleFonts.oswald(fontSize: 18),
-                        ),
-                        backgroundColor: WidgetStateColor.resolveWith(
-                          (states) {
-                            if (states.contains(WidgetState.hovered)) {
-                              return onPrimaryTextColor;
-                            }
-                            if (states.contains(WidgetState.focused)) {
-                              return accentColor;
-                            }
-                            if (states.contains(WidgetState.selected)) {
-                              return lightPrimaryColor;
-                            }
-                            return Colors.transparent;
-                          },
-                        ),
-                        overlayColor: WidgetStatePropertyAll(
-                          onPrimaryTextColor,
-                        ),
-                      ),
-
-                      value: category,
-                      label: category.name.toUpperCase(),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text("Cancel"),
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: _submitExpensedata,
-                child: const Text("Save Expense"),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }
